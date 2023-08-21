@@ -1,25 +1,17 @@
 module.exports = function check(str, bracketsConfig) {
-    let result = 0;
-    for (let i = 0; i < str.lenght; i++) {
+    if (str.length % 2 !== 0) { return false; } // checking pair
 
-        if (str[i] = bracketsConfig[0][0]) { result++; }
-        else if (str[i] = bracketsConfig[0][1]) { result--; }
+    let stack = [];
 
-        if (str[i] = bracketsConfig[1][0]) { result++; }
-        else if (str[i] = bracketsConfig[1][1]) { result--; }
-
-        if (str[i] = bracketsConfig[2][0]) { result++; }
-        else if (str[i] = bracketsConfig[2][1]) { result--; }
-
-        if (str[i] = bracketsConfig[3][0]) { result++; }
-        else if (str[i] = bracketsConfig[1][1]) { result--; }
-
-        if (str[i] = bracketsConfig[4][0]) { result++; }
-        else if (str[i] = bracketsConfig[4][1]) { result--; }
-
-        if (str[i] = bracketsConfig[5][0]) { result++; }
-        else if (str[i] = bracketsConfig[5][1]) { result--; }
+    for (let i = 0; i < str.length; i++) {
+      for (let j = 0; j < bracketsConfig.length; j++) {
+        if (stack[stack.length - 1] === bracketsConfig[j][0] && str[i] === bracketsConfig[j][1]) { stack.pop(); } 
+        else {
+          if (str[i] === bracketsConfig[j][0]) { stack.push(str[i]); }
+        }
+      }
     }
-    if (result === 0) { return true; }
-    else return false;
+    return (stack.length === 0);
 }
+
+
